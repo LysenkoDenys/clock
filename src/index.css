@@ -11,6 +11,8 @@ body {
   font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   color: white;
-  background-color: #50644d;
+  background: #50644d url("img/tomato.png") center/800px no-repeat;
   user-select: none;
 }
+
+/* <a href="https://lovepik.com/images/png-tomato.html">Tomato Png vectors by Lovepik.com</a> */
