@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaPause, FaPlay } from "react-icons/fa";
 import { FaClockRotateLeft } from "react-icons/fa6";
 import ButtonDown from "./ButtonDown";
@@ -6,6 +6,8 @@ import ButtonUp from "./ButtonUp";
 import Author from "./Author";
 
 const Container = () => {
+  const [breaker, setBreaker] = useState(5);
+  const [session, setSession] = useState(25);
   return (
     <div>
       <div id="wrapper" className="p-[5px] max-w-fit">
@@ -25,7 +27,7 @@ const Container = () => {
                 <ButtonDown />
               </div>
               <div id="break-length" className="text-xl font-bold px-1">
-                05
+                {breaker}
               </div>
               <div id="break-increment" className="">
                 <ButtonUp />
@@ -44,7 +46,7 @@ const Container = () => {
                 <ButtonDown />
               </div>
               <div id="session-length" className="text-xl font-bold px-1">
-                25
+                {session}
               </div>
               <div id="session-increment" className="">
                 <ButtonUp />
@@ -63,11 +65,11 @@ const Container = () => {
 
         <div id="controls-wrapper" className="flex justify-around">
           <div id="start_stop" className="">
-            <FaPlay />
-            <FaPause />
+            <FaPlay className="transition-transform duration-[0.3s] ease-[ease-in-out] shadow-[3px_2px_5px_black] hover:shadow-[4px_3px_5px_black] hover:scale-110 hover:bg-[#50644d] active:shadow-[2px_1px_4px_black] active:scale-110 h-[25px] w-[25px]" />
+            <FaPause className="transition-transform duration-[0.3s] ease-[ease-in-out] shadow-[3px_2px_5px_black] hover:shadow-[4px_3px_5px_black] hover:scale-110 hover:bg-[#50644d] active:shadow-[2px_1px_4px_black] active:scale-110 h-[25px] w-[25px]" />
           </div>
           <div id="reset" className="">
-            <FaClockRotateLeft className="transition-transform duration-[0.3s] ease-[ease-in-out] shadow-[3px_2px_5px_black] hover:shadow-[4px_3px_5px_black] hover:scale-110 active:shadow-[2px_1px_4px_black] active:scale-110 rounded-[50%]" />
+            <FaClockRotateLeft className="transition-transform duration-[0.3s] ease-[ease-in-out] shadow-[3px_2px_5px_black] hover:shadow-[4px_3px_5px_black] hover:scale-110 hover:bg-[#50644d] active:shadow-[2px_1px_4px_black] active:scale-110 rounded-[50%] h-[25px] w-[25px]" />
           </div>
         </div>
       </div>
