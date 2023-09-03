@@ -1,51 +1,54 @@
 import React from "react";
-import {
-  FaRegArrowAltCircleDown,
-  FaRegArrowAltCircleUp,
-  FaPause,
-  FaPlay,
-} from "react-icons/fa";
+import { FaPause, FaPlay } from "react-icons/fa";
 import { FaClockRotateLeft } from "react-icons/fa6";
+import ButtonDown from "./ButtonDown";
+import ButtonUp from "./ButtonUp";
 import Author from "./Author";
 
 const Container = () => {
   return (
     <div>
-      <div
-        id="wrapper"
-        className="p-[5px] max-w-fit border-2 border-solid  mx-auto rounded-[5px]"
-      >
+      <div id="wrapper" className="p-[5px] max-w-fit">
         <h1 id="main-title" className="font-extrabold text-2xl">
           Pomodoro Clock
         </h1>
         <div
           id="length-control"
-          className="flex flex-wrap justify-between border"
+          className="flex flex-wrap justify-between mt-1"
         >
-          <div id="break-label" className="">
-            Break Length
-          </div>
-          <div id="break-decrement" className="">
-            <FaRegArrowAltCircleDown />
-          </div>
-          <div id="break-length" className="">
-            5
-          </div>
-          <div id="break-increment" className="">
-            <FaRegArrowAltCircleUp />
+          <div id="brake-control" className="">
+            <div id="break-label" className="text-xl font-bold">
+              Break
+            </div>
+            <div id="brake-controls" className="flex flex-wrap justify-between">
+              <div id="break-decrement" className="">
+                <ButtonDown />
+              </div>
+              <div id="break-length" className="text-xl font-bold px-1">
+                05
+              </div>
+              <div id="break-increment" className="">
+                <ButtonUp />
+              </div>
+            </div>
           </div>
           <div id="length-control" className="">
-            <div id="session-label" className="">
-              Session Length
+            <div id="session-label" className="text-xl font-bold">
+              Session
             </div>
-            <div id="session-decrement" className="">
-              <FaRegArrowAltCircleDown />
-            </div>
-            <div id="session-length" className="">
-              25
-            </div>
-            <div id="session-increment" className="">
-              <FaRegArrowAltCircleUp />
+            <div
+              id="session-controls"
+              className="flex flex-wrap justify-between"
+            >
+              <div id="session-decrement" className="">
+                <ButtonDown />
+              </div>
+              <div id="session-length" className="text-xl font-bold px-1">
+                25
+              </div>
+              <div id="session-increment" className="">
+                <ButtonUp />
+              </div>
             </div>
           </div>
         </div>
@@ -53,19 +56,18 @@ const Container = () => {
           <div id="timer-label" className="font-extrabold text-xl">
             Work it baby!
           </div>
-          <div id="time-left" className="">
+          <div id="time-left" className="text-6xl font-bold">
             25:00
           </div>
         </div>
-        <div id="controls-wrapper" className="">
-          <div id="controls-wrapper" className="">
-            <div id="start_stop" className="">
-              <FaPlay />
-              <FaPause />
-            </div>
-            <div id="reset" className="">
-              <FaClockRotateLeft />
-            </div>
+
+        <div id="controls-wrapper" className="flex justify-around">
+          <div id="start_stop" className="">
+            <FaPlay />
+            <FaPause />
+          </div>
+          <div id="reset" className="">
+            <FaClockRotateLeft className="transition-transform duration-[0.3s] ease-[ease-in-out] shadow-[3px_2px_5px_black] hover:shadow-[4px_3px_5px_black] hover:scale-110 active:shadow-[2px_1px_4px_black] active:scale-110 rounded-[50%]" />
           </div>
         </div>
       </div>
