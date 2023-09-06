@@ -7,31 +7,31 @@ import Author from "./Author";
 const Container = () => {
   const [breaker, setBreaker] = useState(5);
   const [session, setSession] = useState(25);
-  const [timer, setTimer] = useState(25);
-  const [seconds, setSeconds] = useState(0);
+  const [timer, setTimer] = useState(1500);
+  const [startPause, setStartPause] = useState(false);
 
   const buttonStyle =
-    "transition-transform duration-[0.3s] ease-[ease-in-out] shadow-[3px_2px_5px_black] hover:shadow-[4px_3px_5px_black] hover:scale-105 hover:bg-[#50644d] active:shadow-[2px_1px_4px_black] active:scale-110 rounded-[50%] h-[35px] w-[35px] cursor-pointer";
+    "transition-transform duration-[0.3s] ease-[ease-in-out] shadow-[3px_2px_5px_black] hover:shadow-[4px_3px_5px_black] hover:scale-105 hover:bg-[#50644d] active:shadow-[2px_1px_4px_black] active:scale-110 rounded-[50%] h-[40px] w-[40px] cursor-pointer";
 
   const timeResetHandler = () => {
     setBreaker(5);
     setSession(25);
-    setTimer(25);
+    setTimer(1500);
   };
 
   const decrementHandlerBreak = () => breaker > 0 && setBreaker(breaker - 1);
   const incrementHandlerBreak = () => breaker < 60 && setBreaker(breaker + 1);
-  //! timer does not work corresponded correct:
   const decrementHandlerSession = () =>
-    session > 0 && setSession(session - 1) && setTimer(timer - 1);
+    session > 0 && (setSession(session - 1), setTimer(timer - 60));
   const incrementHandlerSession = () =>
-    session < 60 && setSession(session + 1) && setTimer(timer + 1);
+    session < 60 && (setSession(session + 1), setTimer(timer + 60));
 
-  console.log(timer); //
-  const startStopTimerHandler = () => {};
+  const startStopTimerHandler = () => {
+    setStartPause(!startPause);
+  };
 
   var formatAsTime = (timer) => {
-    let seconds = timer * 60;
+    let seconds = timer;
     let minutes = parseInt(seconds / 60);
     seconds = seconds % 60;
 
@@ -43,15 +43,22 @@ const Container = () => {
     return displayTime;
   };
 
-  // //!
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     setSeconds((prevSeconds) => prevSeconds - 1);
-  //   }, 1000);
-  //   // Clean up the interval when the component unmounts
-  //   return () => clearInterval(intervalId);
-  // }, []);
-  // //!
+  //!
+  useEffect(() => {
+    let intervalId;
+    if (startPause) {
+      intervalId = setInterval(() => {
+        setTimer((prevSeconds) => prevSeconds - 1);
+      }, 1000);
+    } else {
+      clearInterval(intervalId);
+    }
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, [startPause]);
+  //!
+
+  console.log(startPause); //
 
   return (
     <div>
@@ -126,8 +133,15 @@ const Container = () => {
 
         <div id="controls-wrapper" className="flex justify-around">
           <div id="start_stop" className="" onClick={startStopTimerHandler}>
-            <ImPlay2 className={buttonStyle} />
-            <ImPause className={`${buttonStyle} + hidden`} />
+            <ImPlay2
+              className={startPause ? `${buttonStyle} + hidden` : buttonStyle}
+              onClick={() => {
+                setStartPause(!startPause);
+              }}
+            />
+            <ImPause
+              className={startPause ? buttonStyle : `${buttonStyle} + hidden`}
+            />
           </div>
           <div id="reset" className="">
             <FaClockRotateLeft
