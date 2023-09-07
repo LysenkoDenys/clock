@@ -17,14 +17,21 @@ const Container = () => {
     setBreaker(5);
     setSession(25);
     setTimer(1500);
+    setStartPause(false);
   };
 
-  const decrementHandlerBreak = () => breaker > 0 && setBreaker(breaker - 1);
-  const incrementHandlerBreak = () => breaker < 60 && setBreaker(breaker + 1);
+  const decrementHandlerBreak = () =>
+    (breaker > 0, !startPause) &&
+    (setBreaker(breaker - 1), setTimer((breaker - 1) * 60));
+  const incrementHandlerBreak = () =>
+    (breaker < 60, !startPause) &&
+    (setBreaker(breaker + 1), setTimer((breaker + 1) * 60));
   const decrementHandlerSession = () =>
-    session > 0 && (setSession(session - 1), setTimer(timer - 60));
+    (session > 0, !startPause) &&
+    (setSession(session - 1), setTimer((session - 1) * 60));
   const incrementHandlerSession = () =>
-    session < 60 && (setSession(session + 1), setTimer(timer + 60));
+    (session < 60, !startPause) &&
+    (setSession(session + 1), setTimer((session + 1) * 60));
 
   const startStopTimerHandler = () => {
     setStartPause(!startPause);
@@ -46,16 +53,19 @@ const Container = () => {
   //!
   useEffect(() => {
     let intervalId;
-    if (startPause) {
+    if (startPause && timer > 0) {
       intervalId = setInterval(() => {
         setTimer((prevSeconds) => prevSeconds - 1);
       }, 1000);
+    } else if (startPause && timer === 0) {
+      setTimer(breaker * 60);
+      // audio should play
     } else {
       clearInterval(intervalId);
     }
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
-  }, [startPause]);
+  }, [startPause, timer, breaker]);
   //!
 
   console.log(startPause); //
