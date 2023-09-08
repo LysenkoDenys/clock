@@ -20,12 +20,14 @@ const Container = () => {
     setStartPause(false);
   };
 
+  //break:
   const decrementHandlerBreak = () =>
     (breaker > 0, !startPause) &&
     (setBreaker(breaker - 1), setTimer((breaker - 1) * 60));
   const incrementHandlerBreak = () =>
     (breaker < 60, !startPause) &&
     (setBreaker(breaker + 1), setTimer((breaker + 1) * 60));
+  // session:
   const decrementHandlerSession = () =>
     (session > 0, !startPause) &&
     (setSession(session - 1), setTimer((session - 1) * 60));
@@ -50,6 +52,11 @@ const Container = () => {
     return displayTime;
   };
 
+  const timerColor =
+    timer > 0 && timer < 60
+      ? "text-8xl font-bold mb-3 text-[#fde047]"
+      : "text-8xl font-bold mb-3";
+
   //!
   useEffect(() => {
     let intervalId;
@@ -73,7 +80,7 @@ const Container = () => {
   return (
     <div>
       <div id="wrapper" className="p-[5px] max-w-fit">
-        <h1 id="main-title" className="font-extrabold text-[26px] mt-3">
+        <h1 id="main-title" className="font-extrabold text-[28px] mt-3">
           Pomodoro Clock
         </h1>
         <div
@@ -133,10 +140,10 @@ const Container = () => {
           </div>
         </div>
         <div id="timer-wrapper" className="">
-          <div id="timer-label" className="font-extrabold text-2xl mt-2">
-            Work it baby!
+          <div id="timer-label" className="font-extrabold text-xl mt-2">
+            {1 ? "You should be working!" : "Time to relax!"}
           </div>
-          <div id="time-left" className="text-8xl font-bold mb-3">
+          <div id="time-left" className={timerColor}>
             {formatAsTime(timer)}
           </div>
         </div>
