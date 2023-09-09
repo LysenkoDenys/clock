@@ -22,19 +22,42 @@ const Container = () => {
   };
 
   //break:
-  const decrementHandlerBreak = () =>
-    (breaker > 0, !startPause) &&
-    (setBreaker(breaker - 1), setTimer((breaker - 1) * 60));
-  const incrementHandlerBreak = () =>
-    (breaker < 60, !startPause) &&
-    (setBreaker(breaker + 1), setTimer((breaker + 1) * 60));
+  const decrementHandlerBreak = () => {
+    if (breaker > 0 && !startPause && !labelSession) {
+      setBreaker(breaker - 1);
+      setTimer((breaker - 1) * 60);
+    } else if (breaker > 0 && !startPause) {
+      setBreaker(breaker - 1);
+    }
+  };
+
+  const incrementHandlerBreak = () => {
+    if (breaker > 0 && !startPause && !labelSession) {
+      setBreaker(breaker + 1);
+      setTimer((breaker + 1) * 60);
+    } else if (breaker > 0 && !startPause) {
+      setBreaker(breaker + 1);
+    }
+  };
+
   // session:
-  const decrementHandlerSession = () =>
-    (session > 0, !startPause) &&
-    (setSession(session - 1), setTimer((session - 1) * 60));
-  const incrementHandlerSession = () =>
-    (session < 60, !startPause) &&
-    (setSession(session + 1), setTimer((session + 1) * 60));
+  const decrementHandlerSession = () => {
+    if (session > 0 && !startPause && labelSession) {
+      setSession(session - 1);
+      setTimer((session - 1) * 60);
+    } else if (session > 0 && !startPause) {
+      setSession(session - 1);
+    }
+  };
+
+  const incrementHandlerSession = () => {
+    if (session > 0 && !startPause && labelSession) {
+      setSession(session + 1);
+      setTimer((session + 1) * 60);
+    } else if (session > 0 && !startPause) {
+      setSession(session + 1);
+    }
+  };
 
   const startStopTimerHandler = () => {
     setStartPause(!startPause);
@@ -53,7 +76,6 @@ const Container = () => {
     return displayTime;
   };
 
-  //!
   useEffect(() => {
     let intervalId;
     if (startPause && timer > 0) {
@@ -73,7 +95,6 @@ const Container = () => {
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, [startPause, timer, breaker, labelSession, session]);
-  //!
 
   return (
     <div>
