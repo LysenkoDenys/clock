@@ -9,6 +9,7 @@ const Container = () => {
   const [session, setSession] = useState(25);
   const [timer, setTimer] = useState(1500);
   const [startPause, setStartPause] = useState(false);
+  const [labelSession, setLabelSession] = useState(true);
 
   const buttonStyle =
     "transition-transform duration-[0.3s] ease-[ease-in-out] shadow-[3px_2px_5px_black] hover:shadow-[4px_3px_5px_black] hover:scale-105 hover:bg-[#50644d] active:shadow-[2px_1px_4px_black] active:scale-110 rounded-[50%] h-[40px] w-[40px] cursor-pointer";
@@ -52,11 +53,6 @@ const Container = () => {
     return displayTime;
   };
 
-  const timerColor =
-    timer > 0 && timer < 60
-      ? "text-8xl font-bold mb-3 text-[#fde047]"
-      : "text-8xl font-bold mb-3";
-
   //!
   useEffect(() => {
     let intervalId;
@@ -65,17 +61,19 @@ const Container = () => {
         setTimer((prevSeconds) => prevSeconds - 1);
       }, 1000);
     } else if (startPause && timer === 0) {
-      setTimer(breaker * 60);
-      // audio should play
+      setLabelSession(!labelSession);
+      labelSession ? setTimer(breaker * 60) : setTimer(session * 60);
+      // audio should play:
+      new Audio(
+        "https://actions.google.com/sounds/v1/alarms/bugle_tune.ogg"
+      ).play();
     } else {
       clearInterval(intervalId);
     }
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
-  }, [startPause, timer, breaker]);
+  }, [startPause, timer, breaker, labelSession, session]);
   //!
-
-  console.log(startPause); //
 
   return (
     <div>
@@ -141,9 +139,16 @@ const Container = () => {
         </div>
         <div id="timer-wrapper" className="">
           <div id="timer-label" className="font-extrabold text-xl mt-2">
-            {1 ? "You should be working!" : "Time to relax!"}
+            {labelSession ? "You should be working!" : "Time to relax!"}
           </div>
-          <div id="time-left" className={timerColor}>
+          <div
+            id="time-left"
+            className={
+              timer > 0 && timer < 60
+                ? "text-8xl font-bold mb-3 text-[#fde047]"
+                : "text-8xl font-bold mb-3"
+            }
+          >
             {formatAsTime(timer)}
           </div>
         </div>
