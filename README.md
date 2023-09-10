@@ -4,17 +4,12 @@
 
 <h5>This app allows you:</h5>
 <ul>
-<li>calculate by pressing appropriate key by keyboard on desktop (enter is equal to '=')</li>
-<li>calculate by push appropriate button on mobile devices</li>
+<li>manage your time to work and relax to make more efficient results</li>
 </ul>
 
 <p>Sample:</p>
 
-<br/>
-<p>This React JS project uses next plug-ins:</p>
-<ul>
-<li>https://www.npmjs.com/package/mathjs</li>
-</ul>
+![145](https://github.com/LysenkoDenys/clock/assets/105970854/3fb18eae-8e70-4ff8-ad72-2ea5868215ff)
 
 <p>Build with TailwindCSS and totally adaptive to most popular devices</p>
 

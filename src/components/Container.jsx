@@ -19,6 +19,7 @@ const Container = () => {
     setSession(25);
     setTimer(1500);
     setStartPause(false);
+    setLabelSession(true);
   };
 
   //break:
@@ -32,10 +33,10 @@ const Container = () => {
   };
 
   const incrementHandlerBreak = () => {
-    if (breaker > 0 && !startPause && !labelSession) {
+    if (breaker >= 0 && !startPause && !labelSession) {
       setBreaker(breaker + 1);
       setTimer((breaker + 1) * 60);
-    } else if (breaker > 0 && !startPause) {
+    } else if (breaker >= 0 && !startPause) {
       setBreaker(breaker + 1);
     }
   };
@@ -51,10 +52,10 @@ const Container = () => {
   };
 
   const incrementHandlerSession = () => {
-    if (session > 0 && !startPause && labelSession) {
+    if (session >= 0 && !startPause && labelSession) {
       setSession(session + 1);
       setTimer((session + 1) * 60);
-    } else if (session > 0 && !startPause) {
+    } else if (session >= 0 && !startPause) {
       setSession(session + 1);
     }
   };
@@ -99,7 +100,7 @@ const Container = () => {
   return (
     <div>
       <div id="wrapper" className="p-[5px] max-w-fit">
-        <h1 id="main-title" className="font-extrabold text-[28px] mt-3">
+        <h1 id="main-title" className="font-extrabold text-[28px] mt-14">
           Pomodoro Clock
         </h1>
         <div
@@ -159,7 +160,7 @@ const Container = () => {
           </div>
         </div>
         <div id="timer-wrapper" className="">
-          <div id="timer-label" className="font-extrabold text-xl mt-2">
+          <div id="timer-label" className="font-extrabold text-xl mt-3">
             {labelSession ? "You should be working!" : "Time to relax!"}
           </div>
           <div
@@ -177,18 +178,26 @@ const Container = () => {
         <div id="controls-wrapper" className="flex justify-around">
           <div id="start_stop" className="" onClick={startStopTimerHandler}>
             <ImPlay2
-              className={startPause ? `${buttonStyle} + hidden` : buttonStyle}
+              className={
+                startPause
+                  ? `${buttonStyle} + hidden`
+                  : `${buttonStyle} + h-[70px] w-[70px]`
+              }
               onClick={() => {
                 setStartPause(!startPause);
               }}
             />
             <ImPause
-              className={startPause ? buttonStyle : `${buttonStyle} + hidden`}
+              className={
+                startPause
+                  ? `${buttonStyle} + h-[70px] w-[70px]`
+                  : `${buttonStyle} + hidden`
+              }
             />
           </div>
           <div id="reset" className="">
             <FaClockRotateLeft
-              className={buttonStyle}
+              className={`${buttonStyle} + h-[70px] w-[70px]`}
               onClick={timeResetHandler}
             />
           </div>
