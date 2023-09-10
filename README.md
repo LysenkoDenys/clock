@@ -9,7 +9,7 @@
 
 <p>Sample:</p>
 
-![145](https://github.com/LysenkoDenys/clock/assets/105970854/3fb18eae-8e70-4ff8-ad72-2ea5868215ff)
+![145](https://github.com/LysenkoDenys/clock/assets/105970854/b6511aed-2cfd-4c94-9c3c-d6009a6ebbe7)
 
 <p>Build with TailwindCSS and totally adaptive to most popular devices</p>
 
