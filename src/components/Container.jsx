@@ -33,10 +33,10 @@ const Container = () => {
   };
 
   const incrementHandlerBreak = () => {
-    if (breaker >= 0 && !startPause && !labelSession) {
+    if (breaker >= 0 && breaker < 60 && !startPause && !labelSession) {
       setBreaker(breaker + 1);
       setTimer((breaker + 1) * 60);
-    } else if (breaker >= 0 && !startPause) {
+    } else if (breaker >= 0 && !startPause && breaker < 60) {
       setBreaker(breaker + 1);
     }
   };
@@ -52,10 +52,10 @@ const Container = () => {
   };
 
   const incrementHandlerSession = () => {
-    if (session >= 0 && !startPause && labelSession) {
+    if (session >= 0 && session < 60 && !startPause && labelSession) {
       setSession(session + 1);
       setTimer((session + 1) * 60);
-    } else if (session >= 0 && !startPause) {
+    } else if (session >= 0 && !startPause && session < 60) {
       setSession(session + 1);
     }
   };
